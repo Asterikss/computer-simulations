@@ -3,8 +3,6 @@ import math
 class Variables:
     radian: float = 0
     orig_angle: float = 0
-    # precision: int = 0
-
 
 def unser_input():
     print("sin(x) approximation using Taylor");
@@ -15,7 +13,6 @@ def unser_input():
 
     while (not_finished):
         if (tmp2 == 1):
-            #orig_angle = tmp
             Variables.orig_angle = tmp
             Variables.radian = convert_to_radian(tmp);
             not_finished = False
@@ -28,9 +25,6 @@ def unser_input():
         else:
             tmp2: int = int(input("If the input is an angle type 1. Otherwise type 2: "))
 
-
-    # precision = int(input("Enter the desired precision (1-10): "))
- 
 
 def sin_x_approx(radian: float, precision: int):
 
