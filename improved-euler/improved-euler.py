@@ -60,16 +60,13 @@ def euler():
     dv_x = 0
     dv_y = 0
 
-    # not_end: bool = True
-
-
     print(f"  t  :  s_x :  s_y :  v_x  : v_y  : ds_x : ds_y : dv_x : dv_y")
     i = 0
     while True:
         t += Vars.dt
         ds_x = v_x * Vars.dt
         ds_y = v_y * Vars.dt
-        dv_y = Vars.g_y * Vars.dt
+        dv_y = Vars.g_y * Vars.dt # here?
 
         if i == 0:
             print(f"{t:.2f} : {s_x:.2f} : {s_y:.2f} : {v_x:.2f} : {v_y:.2f} : {ds_x:.2f} : {ds_y:.2f} : {dv_x:.2f} : {dv_y:.2f}")
@@ -104,9 +101,6 @@ def improved_euler():
     dv_x = 0
     dv_y = 0
 
-    # not_end: bool = True
-
-
     print(f"  t  :  s_x :  s_y :  v_x  : v_y  : mid_x : mid_y: ds_x : ds_y : dv_x : dv_y")
     i = 0
     while True:
@@ -126,7 +120,6 @@ def improved_euler():
         v_x += dv_x
         v_y += dv_y
 
-        # print(f" t : s_x : s_y : v_x : v_y : ds_x : ds_y : dv_x : dv_y")
         t += Vars.dt
         print(f"{t:.2f} : {s_x:.2f} : {s_y:.2f} : {v_x:.2f} : {v_y:.2f} : {mid_point_x:.2f} : {mid_point_y:.2f} : {ds_x:.2f} : {ds_y:.2f} : {dv_x:.2f} : {dv_y:.2f}")
         i = 1
@@ -135,7 +128,7 @@ def improved_euler():
 
 
 def main():
-    # euler()
+    euler()
     improved_euler()
 
 
