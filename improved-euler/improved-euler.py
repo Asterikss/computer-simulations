@@ -46,8 +46,8 @@ def calcF(m: float, g: float, q: float, v: float):
 def calcA(m: float, g: float, q: float, v: float):
     return calcF(m, g, q, v) / m
 
-
-def main():
+def euler():
+    print("euler")
     t = 0
     s_x = 0
     s_y = 0
@@ -64,11 +64,15 @@ def main():
 
 
     print(f"  t  :  s_x :  s_y :  v_x  : v_y  : ds_x : ds_y : dv_x : dv_y")
+    i = 0
     while True:
         t += Vars.dt
         ds_x = v_x * Vars.dt
         ds_y = v_y * Vars.dt
         dv_y = Vars.g_y * Vars.dt
+
+        if i == 0:
+            print(f"{t:.2f} : {s_x:.2f} : {s_y:.2f} : {v_x:.2f} : {v_y:.2f} : {ds_x:.2f} : {ds_y:.2f} : {dv_x:.2f} : {dv_y:.2f}")
 
         s_x += ds_x
         s_y += ds_y
@@ -76,10 +80,63 @@ def main():
         v_x += dv_x
         v_y += dv_y
 
-        # print(f" t : s_x : s_y : v_x : v_y : ds_x : ds_y : dv_x : dv_y")
         print(f"{t:.2f} : {s_x:.2f} : {s_y:.2f} : {v_x:.2f} : {v_y:.2f} : {ds_x:.2f} : {ds_y:.2f} : {dv_x:.2f} : {dv_y:.2f}")
-        if s_y <= 0:
+        i = 1
+        if s_y <= 0.001:
             break
+
+
+def improved_euler():
+    print("improved euler")
+    t = 0
+    s_x = 0
+    s_y = 0
+    v_x = Vars.v0_x
+    v_y = Vars.v0_y
+
+    #v_x(t+dt/2)
+    mid_point_x  = 0
+    mid_point_y  = 0
+
+    ds_x = 0
+    ds_y = 0
+
+    dv_x = 0
+    dv_y = 0
+
+    # not_end: bool = True
+
+
+    print(f"  t  :  s_x :  s_y :  v_x  : v_y  : mid_x : mid_y: ds_x : ds_y : dv_x : dv_y")
+    i = 0
+    while True:
+
+        mid_point_x = v_x + (Vars.g_x * (Vars.dt/2))
+        mid_point_y = v_y + (Vars.g_y * (Vars.dt/2))
+
+        ds_x = mid_point_x * Vars.dt
+        ds_y = mid_point_y * Vars.dt
+        dv_y = Vars.g_y * Vars.dt
+
+        if i == 0:
+            print(f"{t:.2f} : {s_x:.2f} : {s_y:.2f} : {v_x:.2f} : {v_y:.2f} : {mid_point_x:.2f} : {mid_point_y:.2f} : {ds_x:.2f} : {ds_y:.2f} : {dv_x:.2f} : {dv_y:.2f}")
+        s_x += ds_x
+        s_y += ds_y
+
+        v_x += dv_x
+        v_y += dv_y
+
+        # print(f" t : s_x : s_y : v_x : v_y : ds_x : ds_y : dv_x : dv_y")
+        t += Vars.dt
+        print(f"{t:.2f} : {s_x:.2f} : {s_y:.2f} : {v_x:.2f} : {v_y:.2f} : {mid_point_x:.2f} : {mid_point_y:.2f} : {ds_x:.2f} : {ds_y:.2f} : {dv_x:.2f} : {dv_y:.2f}")
+        i = 1
+        if s_y <= 0.001:
+            break
+
+
+def main():
+    # euler()
+    improved_euler()
 
 
 if __name__ == "__main__":
