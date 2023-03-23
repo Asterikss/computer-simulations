@@ -16,31 +16,8 @@ class Vars:
     q = 0.2
 
 
-def calcS(dt: float, s: float, v: float):
-    return s + v * dt;
-
-
-def calcV(dt: float, v: float, a: float):
-    return v + a * dt
-
-
-def calcFg(m: float, g: float):
-    return m * g
-
-
-def calcFo(q: float, v: float):
-    return -q * v
-
-
-def calcF(m: float, g: float, q: float, v: float):
-    return calcFg(m, g) + calcFo(q, v)
-
-
-def calcA(m: float, g: float, q: float, v: float):
-    return calcF(m, g, q, v) / m
-
 def euler_with_resist():
-    print("euler2")
+    print("euler with resist")
     t = 0
     s_x = 0
     s_y = 0
@@ -129,7 +106,7 @@ def euler():
             break
 
 def improved_euler_with_resist():
-    print("improved euler2")
+    print("improved euler with resist")
     t = 0
     s_x = 0
     s_y = 0
@@ -213,20 +190,22 @@ def improved_euler():
 
         if i == 0:
             print(f"{t:.2f} : {s_x:.2f} : {s_y:.2f} : {v_x:.2f} : {v_y:.2f} : {mid_point_x:.2f} : {mid_point_y:.2f} : {ds_x:.2f} : {ds_y:.2f} : {dv_x:.2f} : {dv_y:.2f}")
+            i = 1
         s_x += ds_x
         s_y += ds_y
 
+        v_x += dv_x
+        v_y += dv_y
 
         t += Vars.dt
         print(f"{t:.2f} : {s_x:.2f} : {s_y:.2f} : {v_x:.2f} : {v_y:.2f} : {mid_point_x:.2f} : {mid_point_y:.2f} : {ds_x:.2f} : {ds_y:.2f} : {dv_x:.2f} : {dv_y:.2f}")
-        i = 1
         if s_y <= 0.001:
             break
 
 
 def main():
-    # euler()
-    # improved_euler()
+    euler()
+    improved_euler()
     euler_with_resist()
     improved_euler_with_resist()
 
