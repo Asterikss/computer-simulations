@@ -40,13 +40,8 @@ def euler_with_resist():
         ds_x = v_x * Vars.dt
         ds_y = v_y * Vars.dt
 
-        # dv_x = Vars.g_x * Vars.dt
-        # dv_y = Vars.g_y * Vars.dt # here?
         dv_x = ((1*Vars.g_x - Vars.q* v_x)/ 1) * Vars.dt
         dv_y = ((1*Vars.g_y - Vars.q* v_y)/ 1) * Vars.dt
-
-        # a_x = ((Vars.g_x * 1) - (Vars.q * dv_x)) / 1
-        # a_y = ((Vars.g_y * 1) - (Vars.q * dv_y)) / 1
 
         if i == 0:
             print(f"{t:.2f} : {s_x:.2f} : {s_y:.2f} : {v_x:.2f} : {v_y:.2f} : {ds_x:.2f} : {ds_y:.2f} : {dv_x:.2f} : {dv_y:.2f}")
