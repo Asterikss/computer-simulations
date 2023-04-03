@@ -120,8 +120,50 @@ def pendulum_movement_imprv_euler():
             break
 
 
+def calc_derivative(alfa, omega) -> tuple[float, float]: #pure
+    return (omega, (Vars.g/Vars.l) * math.sin(alfa)) # (kn_alfa (omega), kn_omega (Epsilon))
+
+
+def solve_euler(kn_alfa, kn_omega, half_delta_t) -> tuple[float, float]: #pure
+    return (kn_alfa * half_delta_t, kn_omega * half_delta_t) # (kn_alfa * dt/2, ...)
+
+
 def pendulum_movement_RK4():
-    pass
+    logging.info("pendulum_movement_RK4")
+
+    t = 0
+    alfa = math.radians(Vars.angle)
+    logging.debug(alfa)
+    omega = 0
+    eps = (Vars.g / Vars.l) * math.sin(alfa)
+
+    ki_alfa = 0
+    ki_omega = 0
+    ki_table: list[tuple[float, float]] = []
+    
+    alfa_tmp = alfa
+    omega_tmp = omega
+    for _ in range(4):
+        ki_alfa, ki_omega = calc_derivative(alfa_tmp, omega_tmp)
+        ki_table.append(tuple([ki_alfa, ki_omega]))
+        
+        d_alfa, d_omega = solve_euler(ki_alfa, ki_omega, Vars.dt/2)
+
+        alfa_tmp += d_alfa
+        omega_tmp += d_omega
+
+    logging.info(ki_table)
+
+    alfa += ((ki_table[0][0] + (2 * ki_table[1][0]) + (2 * ki_table[2][0]) + ki_table[3][0]) / 6) * Vars.dt
+    logging.debug(alfa)
+    omega += ((ki_table[0][1] + (2 * ki_table[1][1]) + (2 * ki_table[2][1]) + ki_table[3][1]) / 6) * Vars.dt
+    logging.debug(omega)
+
+    
+
+
+
+
 
 
 def main():
