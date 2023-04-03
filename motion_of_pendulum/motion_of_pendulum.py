@@ -139,11 +139,14 @@ def pendulum_movement_imprv_euler():
             break
 
 
+def pendulum_movement_RK4():
+    pass
 
 
 def main():
     # pendulum_movement_euler()
-    pendulum_movement_imprv_euler()
+    # pendulum_movement_imprv_euler()
+    pendulum_movement_RK4()
 
 
 if __name__ == "__main__":
