@@ -13,14 +13,7 @@ class Vars:
     m = 1 # kg
     
     angle = 45
-    # v0_x = 10
-    # v0_y = 10
-    #
-    # g_x = 0
-    # g_y = -10
-    #
-    # # zakres 0-1
-    # q = 0.2
+
 
 def pendulum_movement_euler():
     logging.info("pendulum_movement_euler")
@@ -49,9 +42,6 @@ def pendulum_movement_euler():
     print(f"{t:.3f} : {alfa:.3f} : {omega:.3f} : {eps:.3f} : {d_a:.3f} : {d_w:.3f} : {x:.3f} : {y:.3f} : {h:.3f} : {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
     i = 0
     while True:
-        # if i == 0:
-        #     print(f"{t:.2f} : {alfa:.2f} : {omega:.2f} : {eps:.2f} : {d_a:.2f} : {d_w:.2f} : {x:.2f} : {y:.2f} : {h:.2f} : {v:.2f}")
-
         t += Vars.dt
         alfa += d_a
         omega += d_w
@@ -65,11 +55,7 @@ def pendulum_movement_euler():
         h = y + Vars.l
         v = Vars.l * omega
 
-        # print(f"{t:.4f} : {alfa:.4f} : {omega:.4f} : {eps:.4f} : {d_a:.4f} : {d_w:.4f} : {x:.4f} : {y:.4f} : {h:.4f} : {v:.4f}")
-        # print(f"{t:.3f} : {alfa:.3f} : {omega:.3f} : {eps:.3f} : {d_a:.3f} : {d_w:.3f} : {x:.3f} : {y:.3f} : {h:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
         print(f"{t:.3f} : {alfa:.3f} : {omega:.3f} : {eps:.3f} : {d_a:.3f} : {d_w:.3f} : {x:.3f} : {y:.3f} : {h:.3f} : {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
-
-
 
         i+=1
         if i > 20:
@@ -108,9 +94,6 @@ def pendulum_movement_imprv_euler():
     print(f"{t:.3f} : {alfa:.3f} : {omega:.3f} : {eps:.3f} :  {mid_a:.3f} :  {mid_w:.3f} :  {mid_e:.3f} :  {d_a:.3f} :  {d_w:.3f} : {x:.3f} : {y:.3f} : {h:.3f} : {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
     i = 0
     while True:
-        # if i == 0:
-        #     print(f"{t:.2f} : {alfa:.2f} : {omega:.2f} : {eps:.2f} : {d_a:.2f} : {d_w:.2f} : {x:.2f} : {y:.2f} : {h:.2f} : {v:.2f}")
-
         t += Vars.dt
         alfa += d_a
         omega += d_w
@@ -131,8 +114,6 @@ def pendulum_movement_imprv_euler():
         v = Vars.l * omega
 
         print(f"{t:.3f} : {alfa:.3f} : {omega:.3f} : {eps:.3f} : {mid_a:.3f} : {mid_w:.3f} : {mid_e:.3f} : {d_a:.3f} : {d_w:.3f} : {x:.3f} : {y:.3f} : {h:.3f} : {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
-
-
 
         i+=1
         if i > 20:
