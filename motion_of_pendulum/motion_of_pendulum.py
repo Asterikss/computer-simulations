@@ -17,7 +17,7 @@ class Vars:
 
 
 def pendulum_movement_euler():
-    logging.info("pendulum_movement_euler")
+    print("pendulum_movement_euler")
 
     t = 0
     alfa = math.radians(Vars.angle)
@@ -39,11 +39,11 @@ def pendulum_movement_euler():
     ec = ep + ek
 
 
-    print("  t   :   alfa  :   omega  :  eps   :  D_a   :  D_w   :   x   :   y   :   h   :  V   :  Ep : Ek  :  Ec  : ")
-    print(f"{t:.3f} : {alfa:.3f} : {omega:.3f} : {eps:.3f} : {d_a:.3f} : {d_w:.3f} : {x:.3f} : {y:.3f} : {h:.3f} : {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
-    # i = 0
-    # while True:
-    for _ in range(80):
+    print("  t   : alfa  :  omega :   eps  :  D_a   :  D_w   :   x   :   y   :   h   :   V   :   Ep  :  Ek   :   Ec")
+    print(f"{t:.3f} : {alfa:.3f} : {omega:.3f}  : {eps:.3f} : {d_a:.3f} : {d_w:.3f} : {x:.3f} : {y:.3f} : {h:.3f} : {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
+
+    for _ in range(120):
+    # for _ in range(20):
         t += Vars.dt
         alfa += d_a
         omega += d_w
@@ -63,14 +63,10 @@ def pendulum_movement_euler():
         ec = ep + ek
 
         print(f"{t:.3f} : {alfa:.3f} : {omega:.3f} : {eps:.3f} : {d_a:.3f} : {d_w:.3f} : {x:.3f} : {y:.3f} : {h:.3f} : {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
-
-        # i+=1
-        # if i > 20:
-        #     break
  
 
 def pendulum_movement_imprv_euler():
-    logging.info("pendulum_movement_imprv_euler")
+    print("pendulum_movement_imprv_euler (rounded to three decimal places): ")
 
     t = 0
     alfa = math.radians(Vars.angle)
@@ -136,7 +132,7 @@ def solve_euler(kn_alfa, kn_omega, half_delta_t) -> tuple[float, float]: #pure
 
 
 def pendulum_movement_RK4():
-    logging.info("pendulum_movement_RK4")
+    print("pendulum_movement_RK4 (rounded to three decimal places): ")
 
     t = 0
     alfa = math.radians(Vars.angle)
@@ -156,7 +152,7 @@ def pendulum_movement_RK4():
 
     d_alfa = 0
     d_omega = 0
-    print("  t   :  alfa :  omega  :  eps  :  D_a   :  D_w   :   x   :   y    :   h   :  V     :  Ep  :  Ek   :   ec")
+    print("  t   :  alfa :  omega :  eps   :  D_a   :  D_w   :   x   :   y    :   h   :  V     :  Ep  :  Ek   :   ec")
     print(f"{t:.3f} : {alfa:.3f} : {omega:.3f}  : {eps:.3f} :  {d_alfa:.3f} :  {d_omega:.3f} : {x:.3f} : {y:.3f} : {h:.3f} :  {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
 
     #for _ in range(120):
@@ -199,9 +195,9 @@ def pendulum_movement_RK4():
 
 
 def main():
-    # pendulum_movement_euler()
+    pendulum_movement_euler()
     # pendulum_movement_imprv_euler()
-    pendulum_movement_RK4()
+    # pendulum_movement_RK4()
 
 
 if __name__ == "__main__":
