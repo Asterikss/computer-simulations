@@ -96,8 +96,8 @@ def pendulum_movement_imprv_euler():
     print("  t   :  alfa :  omega  :  eps  :  mid_a : mid_w : mid_e  :  D_a  :  D_w    :   x   :   y   :   h   :   V   :  Ep   : Ek    :  Ec   : ")
     print(f"{t:.3f} : {alfa:.3f} : {omega:.3f} : {eps:.3f} :  {mid_a:.3f} :  {mid_w:.3f} :  {mid_e:.3f} :  {d_a:.3f} :  {d_w:.3f} : {x:.3f} : {y:.3f} : {h:.3f} : {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
 
-    #for _ in range(120):
-    for _ in range(20):
+    for _ in range(120):
+    # for _ in range(20):
         t += Vars.dt
         alfa += d_a
         omega += d_w
@@ -155,8 +155,8 @@ def pendulum_movement_RK4():
     print("  t   :  alfa :  omega :  eps   :  D_a   :  D_w   :   x   :   y    :   h   :  V     :  Ep  :  Ek   :   ec")
     print(f"{t:.3f} : {alfa:.3f} : {omega:.3f}  : {eps:.3f} :  {d_alfa:.3f} :  {d_omega:.3f} : {x:.3f} : {y:.3f} : {h:.3f} :  {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
 
-    #for _ in range(120):
-    for _ in range(20):
+    for _ in range(120):
+    # for _ in range(20):
         t += Vars.dt
         ki_alfa = 0
         ki_omega = 0
@@ -196,8 +196,8 @@ def pendulum_movement_RK4():
 
 def main():
     pendulum_movement_euler()
-    # pendulum_movement_imprv_euler()
-    # pendulum_movement_RK4()
+    pendulum_movement_imprv_euler()
+    pendulum_movement_RK4()
 
 
 if __name__ == "__main__":
