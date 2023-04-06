@@ -132,7 +132,7 @@ def solve_euler(kn_alfa, kn_omega, half_delta_t) -> tuple[float, float]: #pure
 
 
 def pendulum_movement_RK4():
-    print("pendulum_movement_RK4 (rounded to three decimal places): ")
+    print("pendulum_movement_RK4: ")
 
     t = 0
     alfa = math.radians(Vars.angle)
@@ -153,9 +153,9 @@ def pendulum_movement_RK4():
     d_alfa = 0
     d_omega = 0
     print("  t   :  alfa :  omega :  eps   :  D_a   :  D_w   :   x   :   y    :   h   :  V     :  Ep  :  Ek   :   ec")
-    print(f"{t:.3f} : {alfa:.3f} : {omega:.3f}  : {eps:.3f} :  {d_alfa:.3f} :  {d_omega:.3f} : {x:.3f} : {y:.3f} : {h:.3f} :  {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
+    print(f"{t:.6f} : {alfa:.6f} : {omega:.6f}  : {eps:.6f} :  {d_alfa:.6f} :  {d_omega:.6f} : {x:.6f} : {y:.6f} : {h:.6f} :  {v:.6f} : {ep:.6f}: {ek:.6f} : {ec:.6f}")
 
-    for _ in range(120):
+    for _ in range(440):
     # for _ in range(20):
         t += Vars.dt
         ki_alfa = 0
@@ -191,7 +191,7 @@ def pendulum_movement_RK4():
         ek = (Vars.m * v**2)/2 
         ec = ep + ek
 
-        print(f"{t:.3f} : {alfa:.3f} : {omega:.3f} : {eps:.3f} : {d_alfa:.3f} : {d_omega:.3f} : {x:.3f} : {y:.3f} : {h:.3f} : {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
+        print(f"{t:.6f} : {alfa:.6f} : {omega:.6f}  : {eps:.6f} :  {d_alfa:.6f} :  {d_omega:.6f} : {x:.6f} : {y:.6f} : {h:.6f} :  {v:.6f} : {ep:.6f}: {ek:.6f} : {ec:.6f}")
 
 
 def main():
