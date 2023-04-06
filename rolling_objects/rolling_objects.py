@@ -11,8 +11,6 @@ class Vars:
     r = 2
     h = 20
 
-    # l = 1 # m
-    # g = -10 # m/s^2
     g = 10 # m/s^2
 
     m = 1 # kg
@@ -27,6 +25,10 @@ class Vars:
     acc = g * math.sin(alfa) / (1 + lk / (m * r**2))
     logging.debug(acc)
 
+    eps = acc / r
+    logging.debug(eps)
+    d90 = math.radians(90)  
+    logging.debug(d90)
 
 def func1():
     print("func1")
@@ -39,13 +41,26 @@ def func1():
     ds_x = v * Vars.dt
     dv = Vars.acc * Vars.dt
 
-    # print("  t   : alfa  :  omega :   eps  :  D_a   :  D_w   :   x   :   y   :   h   :   V   :   Ep  :  Ek   :   Ec")
-    # print("  t   : s_x  :  s_y :   v  :  D_s   :  D_v   :   x   :   y   :   h   :   V   :   Ep  :  Ek   :   Ec")
-    print("  t     :    s_x     :     s_y   :    v     :     ds_x     :     dv ")
-    # print(f"{t:.3f} : {alfa:.3f} : {omega:.3f}  : {eps:.3f} : {d_a:.3f} : {d_w:.3f} : {x:.3f} : {y:.3f} : {h:.3f} : {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
-    # print(f"{t:.3f} : {s_x:.3f} : {s_y:.3f}  : {v:.3f} : {ds_x:.3f} : {dv:.3f} : {x:.3f} : {y:.3f} : {h:.3f} : {v:.3f} : {ep:.3f}: {ek:.3f} : {ec:.3f}")
-    # print(f"{t:.3f} : {s_x:.3f} : {s_y:.3f}  : {v:.3f} : {ds_x:.3f} : {dv:.3f} ")
-    print(f"{t:.7f} : {s_x:.7f} : {s_y:.7f}  : {v:.7f} : {ds_x:.7f} : {dv:.7f} ")
+    x_r = s_x  * math.cos(-(Vars.alfa)) - s_y * math.sin(-(Vars.alfa))
+    logging.debug(x_r)
+    y_r = s_x  * math.sin(-(Vars.alfa)) + s_y * math.cos(-(Vars.alfa)) + Vars.h
+    logging.debug(y_r)
+
+    b = 0
+    w = 0 #
+    db = w * Vars.dt
+    dw = Vars.eps * Vars.dt
+
+    x = Vars.r * math.cos(Vars.d90 - b) + x_r
+    y = Vars.r * math.sin(Vars.d90 - b) + y_r
+
+    sh = 0
+    sh2 = Vars.r * math.cos(sh)
+    sh3 = Vars.r * math.sin(sh)
+
+
+    print("  t     :    s_x     :     s_y   :    v     :     ds_x     :     dv   :   x_r    :    y_r     :     b     :     w     :      db     :      dw    :    x   :   y")
+    print(f"{t:.6f} : {s_x:.6f} : {s_y:.6f}  : {v:.6f} : {ds_x:.6f} : {dv:.6f} : {x_r:.6f} : {y_r:.6f}: {b:.6f}  : {w:.6f}  : {db:.6f}  : {dw:.6f} : {x:.6f} : {y:.6f}")
 
     for _ in range(20):
         t += Vars.dt
@@ -55,8 +70,22 @@ def func1():
 
         ds_x = v * Vars.dt
 
-        # print(f"{t:.3f} : {s_x:.3f} : {s_y:.3f}  : {v:.3f} : {ds_x:.3f} : {dv:.3f} ")
-        print(f"{t:.7f} : {s_x:.7f} : {s_y:.7f}  : {v:.7f} : {ds_x:.7f} : {dv:.7f} ")
+        x_r = s_x  * math.cos(-(Vars.alfa)) - s_y * math.sin(-(Vars.alfa))
+        y_r = s_x  * math.sin(-(Vars.alfa)) + s_y * math.cos(-(Vars.alfa)) + Vars.h
+
+        b += db
+        w += dw
+        db = w * Vars.dt
+        dw = Vars.eps * Vars.dt
+
+        x = Vars.r * math.cos(Vars.d90 - b) + x_r
+        y = Vars.r * math.sin(Vars.d90 - b) + y_r
+
+        sh += math.pi / 10
+        sh2 = Vars.r * math.cos(sh)
+        sh3 = Vars.r * math.sin(sh)
+
+        print(f"{t:.6f} : {s_x:.6f} : {s_y:.6f}  : {v:.6f} : {ds_x:.6f} : {dv:.6f} : {x_r:.6f} : {y_r:.6f}: {b:.6f}  : {w:.6f}  : {db:.6f}  : {dw:.6f} : {x:.6f} : {y:.6f}")
 
 
 
