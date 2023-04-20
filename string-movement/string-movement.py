@@ -17,6 +17,7 @@ class Vars:
 
 def string_movement_euler():
     print("------string movement - euler-------")
+
     print("i    ", end="")
     for i in range(Vars.n + 1):
         print(f":    {i}    ", end="")
@@ -67,8 +68,10 @@ def string_movement_euler():
     sum *= (Vars.mi / 2)
     kinetic_energy[0] = sum
 
+
     print(f"\nPotential energy: {potential_energy[0]:.2E}  Kinetic energy: {kinetic_energy[0]:.2E}  "+
           f"Total energy: {potential_energy[0] + kinetic_energy[0]}")
+
 
     for j in range(1, 4):
         print(f"\nf t{j} ", end="")
@@ -96,11 +99,13 @@ def string_movement_euler():
         sum *= (1 /(2*Vars.dx))
         potential_energy[j] = sum
 
+
         sum = 0.0
         for i in range(1, Vars.n):
             sum += math.pow(v_table[i], 2)
         sum *= (Vars.mi / 2)
         kinetic_energy[j] = sum
+
 
         print(f"\nPotential energy: {potential_energy[j]:.2E}  Kinetic energy: {kinetic_energy[j]:.2E}  "+
               f"Total energy: {potential_energy[j] + kinetic_energy[j]}")
@@ -108,6 +113,7 @@ def string_movement_euler():
 
 def string_movement_imprv_euler():
     print("------string movement - improved euler-------")
+
     print("i    ", end="")
     for i in range(Vars.n + 1):
         print(f":    {i}    ", end="")
@@ -158,18 +164,21 @@ def string_movement_imprv_euler():
     sum *= (Vars.mi / 2)
     kinetic_energy[0] = sum
 
+
     print(f"\nPotential energy: {potential_energy[0]:.2E}  Kinetic energy: {kinetic_energy[0]:.2E}  "+
           f"Total energy: {potential_energy[0] + kinetic_energy[0]}")
+
 
     for j in range(1, 11):
         v_mid_table = [0.0 for _ in range(Vars.n + 1)]
         for i in range(len(v_mid_table)):
             v_mid_table[i] += v_table[i] + a_table[i] * (Vars.dt/2)
-            # print(f":  {f_table[i]:.2E}  ", end="")
+
 
         f_mid_table = [0.0 for _ in range(Vars.n + 1)]
         for i in range(len(f_mid_table)):
             f_mid_table[i] = f_table[i] + v_table[i] * (Vars.dt/2)
+
 
         a_mid_table = [0.0 for _ in range(Vars.n + 1)]
         for i in range(1, len(a_mid_table) - 1):
