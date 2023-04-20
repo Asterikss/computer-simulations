@@ -73,7 +73,7 @@ def string_movement_euler():
           f"Total energy: {potential_energy[0] + kinetic_energy[0]}")
 
 
-    for j in range(1, 4):
+    for j in range(1, 11):
         print(f"\nf t{j} ", end="")
         for i in range(len(f_table)):
             f_table[i] += v_table[i] * Vars.dt
