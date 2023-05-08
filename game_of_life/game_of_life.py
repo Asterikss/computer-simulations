@@ -3,15 +3,16 @@ import pygame
 import numpy as np
 import time
 
+
 class Color():
     Background = (10, 10, 10)
     Grid = (40, 40, 40)
     Alive = (0, 255, 0)
+    
 
-# (n to be born, (x <= n to stay alive <= x)
-rules: list[tuple[int, tuple[int, int]]] = [(3, (2,3))]
 
-def update(screen: pygame.Surface, cells: NDArray, size: int, rules, with_evolution: bool=True):
+def update(screen: pygame.Surface, cells: NDArray, size: int, rules, with_evolution=True):
+
     update_cells = np.zeros((cells.shape[0], cells.shape[1]))
 
     for row, col in np.ndindex(cells.shape):
@@ -44,23 +45,32 @@ def update(screen: pygame.Surface, cells: NDArray, size: int, rules, with_evolut
 
 
 def main():
+    # (n to be born, (x <= n to stay alive <= x)
+    rules: list[tuple[int, tuple[int, int]]] = [(3, (2,3))]
+
+    choosen_rules_idx = 0
+
     size = 10
 
+
+
+
     pygame.init()
+
     screen = pygame.display.set_mode((80 * size, 60 * size))
 
     cells = np.zeros((6 * size, 8 * size))
     screen.fill(Color.Grid)
 
 
-    update(screen, cells, size, rules[0], False)
+    update(screen, cells, size, rules[choosen_rules_idx], False)
 
     pygame.display.flip()
     pygame.display.update()
 
     paused = False
 
-    print(1)
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -70,7 +80,7 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     paused = not paused
-                    update(screen, cells, 10, rules[0], False) # should be here
+                    update(screen, cells, 10, rules[choosen_rules_idx], False) # should be here
                     pygame.display.update() #
 
             if pygame.mouse.get_pressed()[0]:
@@ -84,13 +94,13 @@ def main():
                 # print(f"3-{cells[pos[1] // size, pos[0] // size]}")
                 # print(f"2-{pos[1]}")
                 # print(f"2.5-{pos[1] // size}")
-                update(screen, cells, size, rules[0], False)
+                update(screen, cells, size, rules[choosen_rules_idx], False)
                 pygame.display.update()
 
         screen.fill(Color.Grid)
 
         if not paused:
-            cells = update(screen, cells, size, rules[0])
+            cells = update(screen, cells, size, rules[choosen_rules_idx])
             pygame.display.update()
 
 
