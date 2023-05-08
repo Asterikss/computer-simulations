@@ -44,6 +44,21 @@ def update(screen: pygame.Surface, cells: NDArray, size: int, rules, with_evolut
 
 
 def choose_rules(rules, first_time=False):
+    if first_time:
+        # print("Available rules:")
+        # for i, rule in enumerate(rules):
+        #     print(f"nr{i + 1} - {rule[0]} neighbours to be born. {rule[1][0]} <= neighbours to stay alivea <= {rule[1][1]}")
+
+        print("\nInput the index number of the rules you want to choose.")
+        print("You will be able to change them later and add custom rules.")
+        print("To do that, while the simulation is running, press r.")
+        print("You will be prompted for an input then.\n")
+
+        # while True:
+        #     chooice = int(input("Input the index of the choosen rules: "))
+        #     if chooice in range(0, len(rules) + 1):
+        #         return chooice - 1, rules
+        #     print("Enter valid input")
     if not first_time:
         # print("Evolution stopped")
         print("If you want to add custom rules input 'r'. To just change them hit enter")
@@ -56,37 +71,33 @@ def choose_rules(rules, first_time=False):
             rules.append((n_be_born, (n_to_live1, n_to_live2)))
 
 
-        print("Available rules:")
-        for i, rule in enumerate(rules):
-            print(f"nr{i + 1} - {rule[0]} neighbours to be born. {rule[1][0]} <= neighbours to stay alivea <= {rule[1][1]}")
+    print("Available rules:")
+    for i, rule in enumerate(rules):
+        print(f"nr{i + 1} - {rule[0]} neighbours to be born. {rule[1][0]} <= neighbours to stay alivea <= {rule[1][1]}")
 
-        while True:
-            chooice = int(input("Input the index of the choosen rules: "))
-            if chooice in range(0, len(rules) + 1):
-                print("Input cells / click space to resume if the simulation is stopped")
-                return chooice - 1, rules
-            print("Enter valid input")
-
-        # else:
-        #     print("Input cells / click space to resume")
-        #     return previous_chooice, rules
+    while True:
+        chooice = int(input("Input the index of the choosen rules: "))
+        if chooice in range(0, len(rules) + 1):
+            print("Input cells / hit space to start the simulation")
+            return chooice - 1, rules
+        print("Enter valid input")
 
 
-    else:
-        print("Available rules:")
-        for i, rule in enumerate(rules):
-            print(f"nr{i + 1} - {rule[0]} neighbours to be born. {rule[1][0]} <= neighbours to stay alivea <= {rule[1][1]}")
-
-        print("Input the index number of the rules you want to choose.")
-        print("You will be able to change them later and add custom rules.")
-        print("To do that, while the simulation is running, press r.")
-        print("You will be prompted for an input then.")
-
-        while True:
-            chooice = int(input("Input the index of the choosen rules: "))
-            if chooice in range(0, len(rules) + 1):
-                return chooice - 1, rules
-            print("Enter valid input")
+    # else:
+    #     print("Available rules:")
+    #     for i, rule in enumerate(rules):
+    #         print(f"nr{i + 1} - {rule[0]} neighbours to be born. {rule[1][0]} <= neighbours to stay alivea <= {rule[1][1]}")
+    #
+    #     print("Input the index number of the rules you want to choose.")
+    #     print("You will be able to change them later and add custom rules.")
+    #     print("To do that, while the simulation is running, press r.")
+    #     print("You will be prompted for an input then.")
+    #
+    #     while True:
+    #         chooice = int(input("Input the index of the choosen rules: "))
+    #         if chooice in range(0, len(rules) + 1):
+    #             return chooice - 1, rules
+    #         print("Enter valid input")
 
 
 
@@ -112,7 +123,7 @@ def main():
     pygame.display.flip()
     pygame.display.update()
 
-    paused = False
+    paused = True
 
 
     while True:
@@ -126,29 +137,33 @@ def main():
                     paused = not paused
 
                     if paused:
-                        print("~~~Game paused. Hit enter to unpause")
+                        print("~~~Game paused. Hit space to unpause or input cells")
                     else:
-                        print("+++Game running. Hit enter to pause")
+                        print("+++Game running. Hit space to pause")
 
                     update(screen, cells, 10, rules[choosen_rules_idx], False) #
                     pygame.display.update() #
 
                 if event.key == pygame.K_r:
+                        paused = not paused
                         choosen_rules_idx, rules = choose_rules(rules)
 
             if pygame.mouse.get_pressed()[0]:
-                # maby prevent from inserting when its running
-                # print("0000000000000000000000000")
-                pos = pygame.mouse.get_pos()
-                # print(f"1-{pos[1]}")
-                # print(f"1.5-{pos[1] // size}")
-                # print(f"3-{cells[pos[1] // size, pos[0] // size]}")
-                cells[pos[1] // size, pos[0] // size] = 1
-                # print(f"3-{cells[pos[1] // size, pos[0] // size]}")
-                # print(f"2-{pos[1]}")
-                # print(f"2.5-{pos[1] // size}")
-                update(screen, cells, size, rules[choosen_rules_idx], False)
-                pygame.display.update()
+                if paused:
+                    # maby prevent from inserting when its running
+                    # print("0000000000000000000000000")
+                    pos = pygame.mouse.get_pos()
+                    # print(f"1-{pos[1]}")
+                    # print(f"1.5-{pos[1] // size}")
+                    # print(f"3-{cells[pos[1] // size, pos[0] // size]}")
+                    cells[pos[1] // size, pos[0] // size] = 1
+                    # print(f"3-{cells[pos[1] // size, pos[0] // size]}")
+                    # print(f"2-{pos[1]}")
+                    # print(f"2.5-{pos[1] // size}")
+                    update(screen, cells, size, rules[choosen_rules_idx], False)
+                    pygame.display.update()
+                else:
+                    print("You can only input cells when the simulation is paused")
 
         screen.fill(Color.Grid)
 
