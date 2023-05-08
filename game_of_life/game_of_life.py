@@ -8,7 +8,6 @@ class Color():
     Background = (10, 10, 10)
     Grid = (40, 40, 40)
     Alive = (0, 255, 0)
-    
 
 
 def update(screen: pygame.Surface, cells: NDArray, size: int, rules, with_evolution=True):
@@ -44,19 +43,33 @@ def update(screen: pygame.Surface, cells: NDArray, size: int, rules, with_evolut
     return update_cells
 
 
-def main():
-    # (n to be born, (x <= n to stay alive <= x)
-    rules: list[tuple[int, tuple[int, int]]] = [(3, (2,3))]
+def choosen_rules(rules):
+    print("Available default rules:")
+    for i, rule in enumerate(rules):
+        print(f"nr{i + 1} - {rule[0]} neighbours to be born. {rule[1][0]} <= neighbours to stay alivea <= {rule[1][1]}")
 
-    choosen_rules_idx = 0
+    print("Input the index number of the rules you want to choose.")
+    print("You will be able to change them later and add custom rules.")
+    print("To do that, while the simulation is running, press space to stop it.")
+    print("You will be prompted for an input then.")
+    while True:
+        chooice = int(input(": "))
+        if chooice in range(0, len(rules)):
+            return chooice
+        print("Enter valid input")
+
+
+def main():
+
+    # (n to be born, (x <= n to stay alive <= x)
+    rules: list[tuple[int, tuple[int, int]]] = [(3, (2,3)), (2, (2, 7)), (2, (3, 4))]
+
+    choosen_rules_idx = choosen_rules(rules)
 
     size = 10
 
 
-
-
     pygame.init()
-
     screen = pygame.display.set_mode((80 * size, 60 * size))
 
     cells = np.zeros((6 * size, 8 * size))
