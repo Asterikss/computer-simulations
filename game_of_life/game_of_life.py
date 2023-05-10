@@ -5,8 +5,8 @@ import time
 
 
 class Color():
-    Background = (10, 10, 10)
-    Grid = (40, 40, 40)
+    Background = (30, 30, 30)
+    Grid = (60, 60, 60)
     Alive = (0, 255, 0)
 
 
@@ -15,7 +15,14 @@ def update(screen: pygame.Surface, cells: NDArray, size: int, rules, with_evolut
     update_cells = np.zeros((cells.shape[0], cells.shape[1]))
 
     for row, col in np.ndindex(cells.shape):
-        n_alive_around = np.sum(cells[row - 1: row +2, col -1: col +2]) - cells[row, col]
+
+        # n_alive_around = np.sum(cells[row - 1: row +2, col -1: col +2]) - cells[row, col]
+        # v - for torus
+        n_alive_around = int((cells[row, (col-1)%cells.shape[1]] + cells[row, (col+1)%cells.shape[1]] +
+                         cells[(row-1)%cells.shape[0], col] + cells[(row+1)%cells.shape[0], col] +
+                         cells[(row-1)%cells.shape[0], (col-1)%cells.shape[1]] + cells[(row-1)%cells.shape[0], (col+1)%cells.shape[1]] +
+                         cells[(row+1)%cells.shape[0], (col-1)%cells.shape[1]] + cells[(row+1)%cells.shape[0], (col+1)%cells.shape[1]])) # /255
+
         color = Color.Background if cells[row, col] == 0 else Color.Alive
 
         if cells[row, col] == 1:
@@ -150,7 +157,6 @@ def main():
 
             if pygame.mouse.get_pressed()[0]:
                 if paused:
-                    # print("0000000000000000000000000")
                     pos = pygame.mouse.get_pos()
                     # print(f"1-{pos[1]}")
                     # print(f"1.5-{pos[1] // size}")
