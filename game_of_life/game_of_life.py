@@ -21,7 +21,7 @@ def update(screen: pygame.Surface, cells: NDArray, size: int, rules, with_evolut
         n_alive_around = int((cells[row, (col-1)%cells.shape[1]] + cells[row, (col+1)%cells.shape[1]] +
                          cells[(row-1)%cells.shape[0], col] + cells[(row+1)%cells.shape[0], col] +
                          cells[(row-1)%cells.shape[0], (col-1)%cells.shape[1]] + cells[(row-1)%cells.shape[0], (col+1)%cells.shape[1]] +
-                         cells[(row+1)%cells.shape[0], (col-1)%cells.shape[1]] + cells[(row+1)%cells.shape[0], (col+1)%cells.shape[1]])) # /255
+                         cells[(row+1)%cells.shape[0], (col-1)%cells.shape[1]] + cells[(row+1)%cells.shape[0], (col+1)%cells.shape[1]]))
 
         color = Color.Background if cells[row, col] == 0 else Color.Alive
 
@@ -158,13 +158,7 @@ def main():
             if pygame.mouse.get_pressed()[0]:
                 if paused:
                     pos = pygame.mouse.get_pos()
-                    # print(f"1-{pos[1]}")
-                    # print(f"1.5-{pos[1] // size}")
-                    # print(f"3-{cells[pos[1] // size, pos[0] // size]}")
                     cells[pos[1] // size, pos[0] // size] = 1
-                    # print(f"3-{cells[pos[1] // size, pos[0] // size]}")
-                    # print(f"2-{pos[1]}")
-                    # print(f"2.5-{pos[1] // size}")
                     update(screen, cells, size, rules[choosen_rules_idx], False)
                     pygame.display.update()
                 else:
