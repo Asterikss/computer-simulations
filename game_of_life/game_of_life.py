@@ -22,11 +22,11 @@ def update(screen: pygame.Surface, cells: NDArray, size: int, rules, with_evolut
             if rules[1][0] <= n_alive_around <= rules[1][1]:
                 update_cells[row, col] = 1
                 if with_evolution:
-                    color = Color.Alive #
+                    color = Color.Alive
 
             elif n_alive_around < rules[1][0] or n_alive_around > rules[1][1]:
                 if with_evolution:
-                    color = Color.Background #
+                    color = Color.Background
 
 
         else:
@@ -71,6 +71,36 @@ def choose_rules(rules, first_time=False):
         print("Enter valid input")
 
 
+def ask_for_the_layout(cells):
+    print("If you want a blank starting screen where you can place cells press enter.\nOtherwise input 'c'")
+    user_input = str(input(": "))
+    if user_input == "c":
+        print("1 - lotos layout")
+        print("2 - glider layout")
+        user_input = str(input(": "))
+        if user_input == "1":
+            cells[30, 30] = 1
+            cells[31, 31] = 1
+            cells[32, 31] = 1
+            cells[31, 30] = 1
+            cells[31, 29] = 1
+        elif user_input == "2":
+            cells[30, 30] = 1
+            cells[31, 31] = 1
+            cells[29, 30] = 1
+            cells[29, 31] = 1
+            cells[29, 32] = 1
+        else:
+            print("Enter valid input")
+        print("Press space to start or add more cells")
+        return cells
+
+    return cells
+            
+
+
+
+
 def main():
     # (n to be born, (x <= n to stay alive <= x)
     rules: list[tuple[int, tuple[int, int]]] = [(3, (2,3)), (2, (2, 7)), (2, (3, 4))]
@@ -79,11 +109,12 @@ def main():
 
     size = 10
 
+    cells = np.zeros((6 * size, 8 * size))
+    cells = ask_for_the_layout(cells)
 
     pygame.init()
     screen = pygame.display.set_mode((80 * size, 60 * size))
 
-    cells = np.zeros((6 * size, 8 * size))
     screen.fill(Color.Grid)
 
 
