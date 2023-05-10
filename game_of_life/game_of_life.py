@@ -43,22 +43,12 @@ def update(screen: pygame.Surface, cells: NDArray, size: int, rules, with_evolut
 
 def choose_rules(rules, first_time=False):
     if first_time:
-        # print("Available rules:")
-        # for i, rule in enumerate(rules):
-        #     print(f"nr{i + 1} - {rule[0]} neighbours to be born. {rule[1][0]} <= neighbours to stay alivea <= {rule[1][1]}")
-
         print("\nInput the index number of the rules you want to choose.")
         print("You will be able to change them later and add custom rules.")
         print("To do that, while the simulation is running, press r.")
         print("You will be prompted for an input then.\n")
 
-        # while True:
-        #     chooice = int(input("Input the index of the choosen rules: "))
-        #     if chooice in range(0, len(rules) + 1):
-        #         return chooice - 1, rules
-        #     print("Enter valid input")
     if not first_time:
-        # print("Evolution stopped")
         print("If you want to add custom rules input 'r'. To just change them hit enter")
 
         if str(input(": ")).lower() == "r":
@@ -81,26 +71,7 @@ def choose_rules(rules, first_time=False):
         print("Enter valid input")
 
 
-    # else:
-    #     print("Available rules:")
-    #     for i, rule in enumerate(rules):
-    #         print(f"nr{i + 1} - {rule[0]} neighbours to be born. {rule[1][0]} <= neighbours to stay alivea <= {rule[1][1]}")
-    #
-    #     print("Input the index number of the rules you want to choose.")
-    #     print("You will be able to change them later and add custom rules.")
-    #     print("To do that, while the simulation is running, press r.")
-    #     print("You will be prompted for an input then.")
-    #
-    #     while True:
-    #         chooice = int(input("Input the index of the choosen rules: "))
-    #         if chooice in range(0, len(rules) + 1):
-    #             return chooice - 1, rules
-    #         print("Enter valid input")
-
-
-
 def main():
-
     # (n to be born, (x <= n to stay alive <= x)
     rules: list[tuple[int, tuple[int, int]]] = [(3, (2,3)), (2, (2, 7)), (2, (3, 4))]
 
@@ -148,7 +119,6 @@ def main():
 
             if pygame.mouse.get_pressed()[0]:
                 if paused:
-                    # maby prevent from inserting when its running
                     # print("0000000000000000000000000")
                     pos = pygame.mouse.get_pos()
                     # print(f"1-{pos[1]}")
@@ -169,8 +139,8 @@ def main():
             cells = update(screen, cells, size, rules[choosen_rules_idx])
             pygame.display.update()
 
-
         time.sleep(0.001)
+
 
 if __name__ == "__main__":
     main()
