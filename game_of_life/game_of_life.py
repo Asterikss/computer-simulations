@@ -18,8 +18,6 @@ def update(screen: pygame.Surface, cells: NDArray, size: int, rules, with_evolut
         n_alive_around = np.sum(cells[row - 1: row +2, col -1: col +2]) - cells[row, col]
         color = Color.Background if cells[row, col] == 0 else Color.Alive
 
-        # if with_evolution:
-
         if cells[row, col] == 1:
             if rules[1][0] <= n_alive_around <= rules[1][1]:
                 update_cells[row, col] = 1
