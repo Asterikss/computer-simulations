@@ -155,8 +155,8 @@ def pendulum_movement_RK4():
     print("  t   :  alfa :  omega :  eps   :  D_a   :  D_w   :   x   :   y    :   h   :  V     :  Ep  :  Ek   :   ec")
     print(f"{t:.6f} : {alfa:.6f} : {omega:.6f}  : {eps:.6f} :  {d_alfa:.6f} :  {d_omega:.6f} : {x:.6f} : {y:.6f} : {h:.6f} :  {v:.6f} : {ep:.6f}: {ek:.6f} : {ec:.6f}")
 
-    for _ in range(440):
-    # for _ in range(20):
+    # for _ in range(440):
+    for _ in range(20):
         t += Vars.dt
         ki_alfa = 0
         ki_omega = 0
