@@ -12,7 +12,7 @@ class Vars:
     g_x = 0
     g_y = -10
 
-    # zakres 0-1
+    # range - 0-1
     q = 0.2
 
 
@@ -45,6 +45,7 @@ def euler_with_resist():
 
         if i == 0:
             print(f"{t:.2f} : {s_x:.2f} : {s_y:.2f} : {v_x:.2f} : {v_y:.2f} : {ds_x:.2f} : {ds_y:.2f} : {dv_x:.2f} : {dv_y:.2f}")
+            i = 1
 
         s_x += ds_x
         s_y += ds_y
@@ -57,7 +58,7 @@ def euler_with_resist():
 
 
         print(f"{t:.2f} : {s_x:.2f} : {s_y:.2f} : {v_x:.2f} : {v_y:.2f} : {ds_x:.2f} : {ds_y:.2f} : {dv_x:.2f} : {dv_y:.2f} : {a_x:.2f} : {a_y:.2f}")
-        i = 1
+
         if s_y <= 0.001:
             break
 

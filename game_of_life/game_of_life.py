@@ -17,7 +17,7 @@ def update(screen: pygame.Surface, cells: NDArray, size: int, rules, with_evolut
     for row, col in np.ndindex(cells.shape):
 
         # n_alive_around = np.sum(cells[row - 1: row +2, col -1: col +2]) - cells[row, col]
-        # v - for torus
+        # v - so the plain acts as a torus
         n_alive_around = int((cells[row, (col-1)%cells.shape[1]] + cells[row, (col+1)%cells.shape[1]] +
                          cells[(row-1)%cells.shape[0], col] + cells[(row+1)%cells.shape[0], col] +
                          cells[(row-1)%cells.shape[0], (col-1)%cells.shape[1]] + cells[(row-1)%cells.shape[0], (col+1)%cells.shape[1]] +
