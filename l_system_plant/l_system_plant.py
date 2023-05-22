@@ -11,7 +11,7 @@ def l_system_plant():
     stack = deque()
 
     w = "X"
-    for _ in range(4):
+    for _ in range(2):
         tmp_w = ""
         for char in w:
             if char == "F":
@@ -25,13 +25,12 @@ def l_system_plant():
 
     for char in w:
         if char == "F":
-            t.forward(15)
+            t.forward(10)
         elif char == "+":
             t.right(25)
         elif char == "-":
             t.left(25)
         elif char == "[":
-            # stack.append(t.pos())
             stack.append((t.pos(), t.heading()))
         elif char == "]":
             t.penup()
@@ -41,8 +40,6 @@ def l_system_plant():
             t.pendown()
 
     turtle.done()
-    while True:
-        ...
 
 
 def main():
