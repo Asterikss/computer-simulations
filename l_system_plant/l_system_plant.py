@@ -11,7 +11,7 @@ def l_system_plant():
     stack = deque()
 
     w = "X"
-    for _ in range(2):
+    for _ in range(5):
         tmp_w = ""
         for char in w:
             if char == "F":
