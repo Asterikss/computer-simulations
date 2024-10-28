@@ -1,2 +1,1 @@
-# Basics-of-computer-simulations-python
-Basics of computer simulations
+# Basics of computer simulations
